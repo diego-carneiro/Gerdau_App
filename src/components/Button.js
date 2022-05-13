@@ -1,25 +1,46 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { Shadow } from "react-native-neomorph-shadows";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function Button({ name }) {
+export default function Button({ navigation, buttonType, buttonText, buttonNavigation }) {
+
   return (
+    <>
+      {buttonType === 1 &&
+        <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate(buttonNavigation)}>
+          <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }} >{buttonText}</Text>
+        </TouchableOpacity>}
+      {buttonType === 2 &&
+        <TouchableOpacity style={styles.button2} onPress={() => navigation.navigate(buttonNavigation)}>
+          <Text style={{ color: "#FFF", fontSize: 20 }} >{buttonText}</Text>
+        </TouchableOpacity>}
+    </>
 
-      <View style={styles.button}>
-        <Text style={{ color: "#FFF", fontSize: 30 }}>{name}</Text>
-      </View>
 
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    height: 72,
+  button1: {
+    width: "90%",
+    height: 56,
     backgroundColor: "#1E97F3",
     margin: 12,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 50,
     elevation: 8,
+    borderRadius: 12,
+  },
+  button2: {
+    width: "90%",
+    height: 56,
+    backgroundColor: "crimson",
+    margin: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 8,
+    borderRadius: 12,
   },
 });
+
+
