@@ -5,7 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
 import AreasScreen from "./src/views/AreasScreen";
-import LogisticsScreen from "./src/views/LogisticsScreen"
+import LogisticsScreen from "./src/views/Areas/LogisticsScreen";
 import StackNavigator from "./src/navigation/StackNavigator/StackNavigator";
 
 
