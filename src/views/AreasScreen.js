@@ -5,7 +5,7 @@ import Button from "../components/Button";
 export default function AreasScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView contentContainerStyle={{flexGrow : 1, alignItems : 'center'}}>
         <Button navigation={navigation} buttonType={1} buttonText={"LOGÍSTICA"} buttonNavigation={"Logística"} />
         <Button navigation={navigation} buttonType={1} buttonText={"BARRAS"} buttonNavigation={"Barras"}/>
         <Button navigation={navigation} buttonType={1} buttonText={"TAI"} buttonNavigation={"TAI"}/>

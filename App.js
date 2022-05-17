@@ -1,21 +1,19 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-import AreasScreen from "./src/views/AreasScreen";
-import LogisticsScreen from "./src/views/Areas/LogisticsScreen";
 import StackNavigator from "./src/navigation/StackNavigator/StackNavigator";
-
+import AuthProvider from "./src/contexts/auth";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <StackNavigator />
+      <AuthProvider>
+        <StackNavigator />
+      </AuthProvider>
     </NavigationContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,38 +7,116 @@ import {
   TextInput,
 } from "react-native";
 import { Modalize } from "react-native-modalize";
+import { AuthContext } from "../contexts/auth";
 
-import Button from "../components/Button";
+import Local from "./Modal/Local";
+import Desvio from "./Modal/Desvio";
+import Peso from "./Modal/Peso";
+import Quantitidade from "./Modal/Quantidade";
+import Categorias from "./Modal/Categorias";
+import SubCategoria from "./Modal/SubCategoria";
 
-export default function NovoDesvio({ navigation }) {
+export default function NovoDesvio() {
   const modalizeRef = useRef(null);
+  const [modalContent, setModalContent] = useState(0);
+  const { local, desvio, peso, quantitidade, categoria, subCategoria } =
+    useContext(AuthContext);
 
   function triggerModal() {
     modalizeRef.current?.open();
   }
 
+  function criarDesvio(){
+    
+  }
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={() => showMode("date")}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          triggerModal();
+          setModalContent(1);
+        }}
+      >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
-          SELECIONAR DATA
+          LOCAL
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={triggerModal}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          triggerModal();
+          setModalContent(2);
+        }}
+      >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
-          INSERIR NOVOS DESVIOS
+          DESVIO
         </Text>
       </TouchableOpacity>
 
-      <Button
-        navigation={navigation}
-        buttonType={2}
-        buttonText={"ALTERAR DESVIOS ANTERIORES"}
-      />
-      <Button buttonType={1} buttonText={"SALVAR"} onPress={() => saveName()} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          triggerModal();
+          setModalContent(3);
+        }}
+      >
+        <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
+          PESOS
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          triggerModal();
+          setModalContent(4);
+        }}
+      >
+        <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
+          QUANTIDADE
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          triggerModal();
+          setModalContent(5);
+        }}
+      >
+        <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
+          CATEGORIAS
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          triggerModal();
+          setModalContent(6);
+        }}
+      >
+        <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
+          SUBCATEGORIAS
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.creationButton}>
+        <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
+          CRIAR NOVO DESVIO
+        </Text>
+      </TouchableOpacity>
+
       <Modalize ref={modalizeRef} snapPoint={600}>
-        <Text>pinto cu buceta</Text>
+        {modalContent === 1 && <Local />}
+        {modalContent === 2 && <Desvio />}
+        {modalContent === 3 && <Peso />}
+        {modalContent === 4 && <Quantitidade />}
+        {modalContent === 5 && <Categorias />}
+        {modalContent === 6 && <SubCategoria />}
       </Modalize>
     </View>
   );
@@ -54,6 +132,16 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 56,
     backgroundColor: "#1E97F3",
+    margin: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 8,
+    borderRadius: 12,
+  },
+  creationButton: {
+    width: "90%",
+    height: 56,
+    backgroundColor: "#06A94D",
     margin: 12,
     justifyContent: "center",
     alignItems: "center",

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,20 +7,16 @@ import {
   TextInput,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { Modalize } from "react-native-modalize";
-
+import { AuthContext } from "../../contexts/auth";
 import Button from "../../components/Button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function NovoIMA({ navigation }) {
-  const [groupName, setGroupName] = useState("");
+  const { setGroupName, setData } = useContext(AuthContext);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [text, setText] = useState(null);
-
-  const saveName = () => {
-    console.log("saved");
-  };
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -35,19 +31,13 @@ export default function NovoIMA({ navigation }) {
       "/" +
       tempDate.getFullYear();
 
-    setText(fDate);
+    setData(fDate);
   };
 
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
   };
-
-  const modalizeRef = useRef(null);
-
-  function triggerModal() {
-    modalizeRef.current?.open();
-  }
 
   return (
     <View style={styles.container}>
@@ -61,8 +51,6 @@ export default function NovoIMA({ navigation }) {
           SELECIONAR DATA
         </Text>
       </TouchableOpacity>
-
-      {/* <Text style={{ fontWeight: "bold", fontSize: 20 }}>{text}</Text> */}
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -76,19 +64,25 @@ export default function NovoIMA({ navigation }) {
 
       <Button
         navigation={navigation}
-        buttonType={2}
-        buttonText={"INSERIR DESVIOS NOVOS"}
+        buttonType={1}
+        buttonText={"INSERIR NOVO DESVIO"}
         buttonNavigation={"Novo Desvio"}
       />
       <Button
         navigation={navigation}
-        buttonType={2}
+        buttonType={1}
         buttonText={"ALTERAR DESVIOS ANTERIORES"}
       />
-      <Button buttonType={1} buttonText={"SALVAR"} onPress={() => saveName()} />
-      <Modalize ref={modalizeRef} snapPoint={600}>
-        <Text>pinto cu buceta</Text>
-      </Modalize>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("Conferir IMA");
+        }}
+      >
+        <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
+          Conferir IMA
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
