@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,12 +10,12 @@ import {
 import { AuthContext } from "../../contexts/auth";
 
 export default function Quantidade() {
-  const { quantidade, setQuantidade } = useContext(AuthContext);
+  const { setQuantidade } = useContext(AuthContext);
 
   function triggerAlert() {
     Alert.alert(
       "Definição de pesos",
-      `O valor de quantidade foi definid.`
+      `O valor de quantidade foi definido.`
     );
   }
 

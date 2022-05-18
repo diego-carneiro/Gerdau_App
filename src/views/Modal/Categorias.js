@@ -10,7 +10,7 @@ import {
 import { AuthContext } from "../../contexts/auth";
 
 export default function Categorias() {
-  const { setSubCatSelector } = useContext(AuthContext);
+  const { setCategoria, setSubCatSelector } = useContext(AuthContext);
 
   function triggerAlert() {
     Alert.alert("Definição de categorias", `Categoria definida.`);
@@ -22,7 +22,7 @@ export default function Categorias() {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setSubCatSelector("A"), triggerAlert()
+          setSubCatSelector("A"), triggerAlert(), setCategoria("Resíduos Sólidos")
         }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
@@ -32,7 +32,7 @@ export default function Categorias() {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setSubCatSelector("B"), triggerAlert()
+          setSubCatSelector("B"), triggerAlert(), setCategoria("Emissões Atmosféricas")
         }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
@@ -41,7 +41,7 @@ export default function Categorias() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {setSubCatSelector("C"), triggerAlert()}}
+        onPress={() => { setSubCatSelector("C"), triggerAlert(), setCategoria("Efluentes a Água") }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           C. Efluentes a Água
@@ -49,7 +49,7 @@ export default function Categorias() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {setSubCatSelector("D"), triggerAlert()}}
+        onPress={() => { setSubCatSelector("D"), triggerAlert(), setCategoria("Produtos Químicos") }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           D. Produtos Químicos
@@ -57,7 +57,7 @@ export default function Categorias() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {setSubCatSelector("E"), triggerAlert()}}
+        onPress={() => { setSubCatSelector("E"), triggerAlert(), setCategoria("Gases") }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           E. Gases
@@ -65,7 +65,7 @@ export default function Categorias() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {setSubCatSelector("F"), triggerAlert()}}
+        onPress={() => { setSubCatSelector("F"), triggerAlert(), setCategoria("Recursos de Emergência") }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           F. Recursos de Emergência
@@ -73,7 +73,7 @@ export default function Categorias() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {setSubCatSelector("G"), triggerAlert()}}
+        onPress={() => { setSubCatSelector("G"), triggerAlert(), setCategoria("Documentos e comunicação") }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           G. Documentos e comunicação

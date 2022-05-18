@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,18 +7,10 @@ import {
   Alert,
   TextInput,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../../contexts/auth";
 
 export default function Desvio() {
-  const [description, setDescription] = useState("");
-
-  async function recordDesvioDescription() {
-    await AsyncStorage.setItem("@desvioDescription", description);
-    Alert.alert("Quantidade", `A Quantidade foi definida para: ${description}`),
-    {
-      text: "OK",
-    };
-  }
+  const { setDesvio } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -26,9 +18,9 @@ export default function Desvio() {
       <TextInput
         style={styles.input}
         placeholder="Descrição do desvio"
-        onChangeText={(value) => setDescription(value)}
+        onChangeText={(value) => setDesvio(value)}
       />
-      <TouchableOpacity style={styles.button} onPress={recordDesvioDescription}>
+      <TouchableOpacity style={styles.button}>
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           SALVAR
         </Text>

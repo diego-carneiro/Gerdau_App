@@ -4,7 +4,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  TextInput,
+  Alert,
 } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { AuthContext } from "../contexts/auth";
@@ -19,17 +19,31 @@ import SubCategoria from "./Modal/SubCategoria";
 export default function NovoDesvio() {
   const modalizeRef = useRef(null);
   const [modalContent, setModalContent] = useState(0);
-  const { local, desvio, peso, quantitidade, categoria, subCategoria } =
+  const { local, desvio, peso, quantidade, categoria, subCategoria, listaDeDesvios, setListaDeDesvios } =
     useContext(AuthContext);
 
   function triggerModal() {
     modalizeRef.current?.open();
   }
 
-  function criarDesvio(){
-    
+  function criarDesvio() {
+    const novoDesvio = {
+      local: local,
+      desvio: desvio,
+      pesos: peso,
+      quantitidade: quantidade,
+      categorias: categoria,
+      subCategorias: subCategoria,
+    }
+    const arrayUpdate = [...listaDeDesvios, novoDesvio]
+    setListaDeDesvios(arrayUpdate);
+    console.log(listaDeDesvios, "array");
+    return novoDesvio;
   }
 
+  function triggerAlert() {
+    Alert.alert("Novo Desvio", `Um desvio foi adicionado ao relatório.`);
+  }
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -104,7 +118,7 @@ export default function NovoDesvio() {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.creationButton}>
+      <TouchableOpacity style={styles.creationButton} onPress={() => { criarDesvio(), triggerAlert() }}>
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           CRIAR NOVO DESVIO
         </Text>

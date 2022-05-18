@@ -74,7 +74,7 @@ export default function NovoIMA({ navigation }) {
         buttonText={"ALTERAR DESVIOS ANTERIORES"}
       />
       <TouchableOpacity
-        style={styles.button}
+        style={styles.creationButton}
         onPress={() => {
           navigation.navigate("Conferir IMA");
         }}
@@ -114,5 +114,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  creationButton: {
+    width: "90%",
+    height: 56,
+    backgroundColor: "#06A94D",
+    margin: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 8,
+    borderRadius: 12,
   },
 });

@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 
 export default function Button({
   navigation,
