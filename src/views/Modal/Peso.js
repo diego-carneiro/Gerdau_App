@@ -20,7 +20,7 @@ export default function Peso() {
       `O valor de peso foi definido.`
     );
   }
-
+console.log(peso);
   return (
     <View style={styles.container}>
       <TouchableOpacity

@@ -11,7 +11,7 @@ export default function AreasScreen({ navigation }) {
         <Button navigation={navigation} buttonType={1} buttonText={"TAI"} buttonNavigation={"TAI"}/>
         <Button navigation={navigation} buttonType={1} buttonText={"T2"} buttonNavigation={"T2"}/>
         <Button navigation={navigation} buttonType={1} buttonText={"SOLDAS"} buttonNavigation={"Soldas"}/>
-        <Button navigation={navigation} buttonType={1} buttonText={"PRODUTOS PRONTOS"} buttonNavigation={"Produtos Prontos"}/>
+        <Button navigation={navigation} buttonType={1} buttonText={"PRODUTOS PRONTOS"} buttonNavigation={"Produtos"}/>
         <Button navigation={navigation} buttonType={1} buttonText={"FACILITIES"} buttonNavigation={"Facilities"}/>
         <Button navigation={navigation} buttonType={1} buttonText={"MAN. MECÂNICA E UTILIDADES"} buttonNavigation={"Man. Mecânica e Utilidades"}/>
         <Button navigation={navigation} buttonType={1} buttonText={"PERITAGEM, ALMOXARIFADO E ENG. MANUTENÇÃO"} buttonNavigation={"Peritagem, Almox e Eng."}/>

@@ -12,7 +12,8 @@ function AuthProvider({ children }) {
   const [categoria, setCategoria] = useState("");
   const [subCategoria, setSubCategoria] = useState("");
   const [subCatSelector, setSubCatSelector] = useState("");
-  const [listaDeDesvios, setListaDeDesvios] = useState([]);
+  const listaDeDesvios = [];
+  const [imageCode, setImageCode] = useState(null);
 
   return (
     <AuthContext.Provider
@@ -36,7 +37,8 @@ function AuthProvider({ children }) {
         subCatSelector,
         setSubCatSelector,
         listaDeDesvios,
-        setListaDeDesvios,
+        imageCode,
+        setImageCode,
       }}
     >
       {children}

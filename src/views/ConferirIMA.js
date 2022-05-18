@@ -1,44 +1,55 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+} from "react-native";
 
 export default function ConferirIMA() {
-  const { groupName, data, listaDeDesvios } = useContext(AuthContext);
+  const { groupName, data, listaDeDesvios, imageCode } =
+    useContext(AuthContext);
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{flexGrow : 1}}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={styles.mainTitle}>Relatório</Text>
         <Text style={styles.subTitle}>Nomes</Text>
-        <Text style={styles.topicContent}>{groupName}</Text>
+        <Text style={styles.topicContent1}>{groupName}</Text>
         <Text style={styles.subTitle}>Data</Text>
-        <Text style={styles.topicContent}>{data}</Text>
+        <Text style={styles.topicContent1}>{data}</Text>
         <Text style={styles.subTitle}>Desvio</Text>
-        {listaDeDesvios.map((item) => (
-          <>
+        {listaDeDesvios.map((item, index) => (
+          <View key={index}>
             <Text style={styles.topicTitle}>Local</Text>
-            <Text style={styles.topicContent}>{item.local}</Text>
+            <Text style={styles.topicContent2}>{item.local}</Text>
             <Text style={styles.topicTitle}>Desvio</Text>
-            <Text style={styles.topicContent}>{item.desvio}</Text>
+            <Text style={styles.topicContent2}>{item.desvio}</Text>
             <Text style={styles.topicTitle}>Pesos</Text>
-            <Text style={styles.topicContent}>{item.peso}</Text>
+            <Text style={styles.topicContent2}>{item.pesos}</Text>
             <Text style={styles.topicTitle}>Quantidade</Text>
-            <Text style={styles.topicContent}>{item.quantidade}</Text>
+            <Text style={styles.topicContent2}>{item.quantidade}</Text>
             <Text style={styles.topicTitle}>Categorias</Text>
-            <Text style={styles.topicContent}>{item.categoria}</Text>
+            <Text style={styles.topicContent2}>{item.categorias}</Text>
             <Text style={styles.topicTitle}>SubCategorias</Text>
-            <Text style={styles.topicContent}>{item.subCategoria}</Text>
-          </>
+            <Text style={styles.topicContent2}>{item.subCategorias}</Text>
+          </View>
         ))}
-        <TouchableOpacity style={styles.button} >
+        <Text style={styles.subTitle}>Imagens</Text>
+        <Image
+          style={{ width: "80%", height: 320, marginLeft: 50 }}
+          source={{ uri: imageCode }}
+        />
+        <TouchableOpacity style={styles.button}>
           <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
             GERAR RELATÓRIO
           </Text>
         </TouchableOpacity>
       </ScrollView>
-
-    </View >
-
+    </View>
   );
 }
 
@@ -64,7 +75,11 @@ const styles = StyleSheet.create({
     marginLeft: 34,
     marginTop: 10,
   },
-  topicContent: {
+  topicContent1: {
+    fontSize: 14,
+    marginLeft: 30,
+  },
+  topicContent2: {
     fontSize: 14,
     marginLeft: 60,
   },
@@ -72,5 +87,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginTop: 20,
     marginBottom: 20,
-  }
+  },
 });

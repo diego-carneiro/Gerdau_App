@@ -15,6 +15,7 @@ import PAEScreen from "../../views/Areas/PAEScreen"
 import MEFScreen from "../../views/Areas/MEFScreen"
 import NovoDesvio from "../../views/NovoDesvio";
 import ConferirIMA from "../../views/ConferirIMA";
+import CameraScreen from "../../components/CameraScreen";
 
 import History from "../../views/History";
 
@@ -38,6 +39,7 @@ export default function StackNavigator() {
       <Stack.Screen name="Histórico" component={History} />
       <Stack.Screen name="Novo Desvio" component={NovoDesvio} />
       <Stack.Screen name="Conferir IMA" component={ConferirIMA} />
+      <Stack.Screen name="Camera" component={CameraScreen} />
    </Stack.Navigator>
   );
 }

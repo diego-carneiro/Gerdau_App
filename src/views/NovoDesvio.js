@@ -1,13 +1,8 @@
 import React, { useState, useRef, useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { AuthContext } from "../contexts/auth";
+import Button from "../components/Button";
 
 import Local from "./Modal/Local";
 import Desvio from "./Modal/Desvio";
@@ -16,11 +11,18 @@ import Quantitidade from "./Modal/Quantidade";
 import Categorias from "./Modal/Categorias";
 import SubCategoria from "./Modal/SubCategoria";
 
-export default function NovoDesvio() {
+export default function NovoDesvio({ navigation }) {
   const modalizeRef = useRef(null);
   const [modalContent, setModalContent] = useState(0);
-  const { local, desvio, peso, quantidade, categoria, subCategoria, listaDeDesvios, setListaDeDesvios } =
-    useContext(AuthContext);
+  const {
+    local,
+    desvio,
+    peso,
+    quantidade,
+    categoria,
+    subCategoria,
+    listaDeDesvios,
+  } = useContext(AuthContext);
 
   function triggerModal() {
     modalizeRef.current?.open();
@@ -31,19 +33,18 @@ export default function NovoDesvio() {
       local: local,
       desvio: desvio,
       pesos: peso,
-      quantitidade: quantidade,
+      quantidade: quantidade,
       categorias: categoria,
       subCategorias: subCategoria,
-    }
-    const arrayUpdate = [...listaDeDesvios, novoDesvio]
-    setListaDeDesvios(arrayUpdate);
+    };
+    listaDeDesvios.push(novoDesvio);
     console.log(listaDeDesvios, "array");
-    return novoDesvio;
   }
 
   function triggerAlert() {
     Alert.alert("Novo Desvio", `Um desvio foi adicionado ao relatório.`);
   }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -118,7 +119,19 @@ export default function NovoDesvio() {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.creationButton} onPress={() => { criarDesvio(), triggerAlert() }}>
+      <Button
+        navigation={navigation}
+        buttonType={1}
+        buttonText={" TIRAR FOTOS"}
+        buttonNavigation={"Camera"}
+      />
+
+      <TouchableOpacity
+        style={styles.creationButton}
+        onPress={() => {
+          criarDesvio(), triggerAlert();
+        }}
+      >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           CRIAR NOVO DESVIO
         </Text>
