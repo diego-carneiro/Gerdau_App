@@ -38,7 +38,6 @@ export default function NovoDesvio({ navigation }) {
       subCategorias: subCategoria,
     };
     listaDeDesvios.push(novoDesvio);
-    console.log(listaDeDesvios, "array");
   }
 
   function triggerAlert() {

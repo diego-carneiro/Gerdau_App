@@ -11,6 +11,13 @@ import { AuthContext } from "../../contexts/auth";
 
 export default function Desvio() {
   const { setDesvio } = useContext(AuthContext);
+    
+  function triggerAlert() {
+    Alert.alert(
+      "Definição de desvio",
+      `Um desvio foi adicionado.`
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -20,7 +27,7 @@ export default function Desvio() {
         placeholder="Descrição do desvio"
         onChangeText={(value) => setDesvio(value)}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={triggerAlert}>
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           SALVAR
         </Text>

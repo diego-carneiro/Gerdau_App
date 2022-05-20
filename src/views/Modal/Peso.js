@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
-  TextInput,
   View,
   TouchableOpacity,
   Alert,
@@ -10,17 +9,15 @@ import {
 import { AuthContext } from "../../contexts/auth";
 
 export default function Peso() {
-  const { peso, setPeso } = useContext(AuthContext);
+  const { setPeso } = useContext(AuthContext);
 
   function triggerAlert() {
-
-    
     Alert.alert(
       "Definição de pesos",
       `O valor de peso foi definido.`
     );
   }
-console.log(peso);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
