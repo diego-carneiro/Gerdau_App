@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../contexts/auth";
+import * as Print from "expo-print";
+import { shareAsync } from "expo-sharing";
 import {
   StyleSheet,
   View,
@@ -10,8 +12,95 @@ import {
 } from "react-native";
 
 export default function ConferirIMA() {
-  const { groupName, data, listaDeDesvios, imageCode } =
+  const { groupName, data, listaDeDesvios, imageArray } =
     useContext(AuthContext);
+
+  const printToFile = async () => {
+    const { uri } = await Print.printToFileAsync({
+      html: createDynamicTable(),
+
+    });
+    console.log('File has been saved to:', uri);
+    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+  }
+
+  const createDynamicTable = () => {
+    var table = "";
+    for (let i in listaDeDesvios) {
+      const item = listaDeDesvios[i];
+      table = table + `
+        <tr>
+          <td>${item.local}</td>
+          <td>${item.desvio}</td>
+          <td>${item.pesos}</td>
+          <td>${item.quantidade}</td>
+          <td>${item.categorias}</td>
+          <td>${item.subCategorias}</td>
+        </tr>
+      `
+    }
+    const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+        <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+        </head>
+      <body style="text-align: center;">
+      <h1>Relatório<h1>
+        <table>
+          <tr>
+            <th>Nomes</th>
+          </tr>
+          <tr>
+            <td>${groupName}</td>
+          </tr>
+        <table>
+        <table>
+          <tr>
+            <th>Data</th>          
+          </tr>
+          <tr>
+            <td>${data}</td>                 
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Local</th>
+            <th>Desvio</th>
+            <th>Pesos</th>
+          <tr>
+        </table>
+        <table>
+          <tr>
+            <th>Quantidade</th>
+            <th>Categorias</th>
+            <th>SubCategorias</th>
+          </tr>
+          ${table}
+        </table>
+        <img src={${imageArray[0]}} />
+      </body>
+    </html> 
+  `;
+    return html;
+  }
 
   return (
     <View style={styles.container}>
@@ -39,11 +128,16 @@ export default function ConferirIMA() {
           </View>
         ))}
         <Text style={styles.subTitle}>Imagens</Text>
-        <Image
-          style={{ width: "80%", height: 320, marginLeft: 50 }}
-          source={{ uri: imageCode }}
-        />
-        <TouchableOpacity style={styles.button}>
+        {imageArray.map((item, index) => (
+          <Image
+            style={{
+              width: "80%", height: 320, marginLeft: 50, marginTop: 20,
+              marginBottom: 20,
+            }}
+            source={{ uri: item }}
+          />
+        ))}
+        <TouchableOpacity style={styles.button} onPress={printToFile}>
           <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
             GERAR RELATÓRIO
           </Text>
@@ -59,6 +153,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   mainTitle: {
+
+
     margin: 10,
     fontSize: 22,
     textAlign: "center",
@@ -87,5 +183,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginTop: 20,
     marginBottom: 20,
+  },
+  button: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#1E97F3",
+    margin: 12,
+    borderRadius: 12,
+    height: 50,
   },
 });

@@ -5,6 +5,7 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { FontAwesome } from "@expo/vector-icons";
@@ -12,8 +13,15 @@ import { AuthContext } from "../contexts/auth";
 
 export default function CameraScreen() {
   const [hasPermission, setHasPermission] = useState(null);
-  const { setImageCode } = useContext(AuthContext);
+  const { imageArray, imageCode, setImageCode, setImageArray } = useContext(AuthContext);
   const camRef = useRef(null);
+
+  function triggerAlert() {
+    Alert.alert(
+      "Captura de Imagem",
+      `Imagem de desvio salva.`
+    );
+  }
 
   useEffect(() => {
     (async () => {
@@ -44,7 +52,7 @@ export default function CameraScreen() {
         type={Camera.Constants.Type.back}
         ref={camRef}
       />
-      <TouchableOpacity style={styles.button} onPress={ takePicture }>
+      <TouchableOpacity style={styles.button} onPress={() => { takePicture(), triggerAlert() }}>
         <FontAwesome name="camera" size={22} color="#FFF" />
       </TouchableOpacity>
     </SafeAreaView>

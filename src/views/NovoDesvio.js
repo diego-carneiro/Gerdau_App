@@ -22,11 +22,16 @@ export default function NovoDesvio({ navigation }) {
     categoria,
     subCategoria,
     listaDeDesvios,
+    setListaDeDesvios,
+    imageCode,
+    imageArray,
+    setImageArray
   } = useContext(AuthContext);
 
   function triggerModal() {
     modalizeRef.current?.open();
   }
+
 
   function criarDesvio() {
     const novoDesvio = {
@@ -37,9 +42,10 @@ export default function NovoDesvio({ navigation }) {
       categorias: categoria,
       subCategorias: subCategoria,
     };
-    listaDeDesvios.push(novoDesvio);
+    setListaDeDesvios([...listaDeDesvios, novoDesvio]);
+    setImageArray([...imageArray, imageCode]);
   }
-
+console.log(imageArray);
   function triggerAlert() {
     Alert.alert("Novo Desvio", `Um desvio foi adicionado ao relatório.`);
   }
