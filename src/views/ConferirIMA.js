@@ -39,6 +39,7 @@ export default function ConferirIMA() {
         </tr>
       `
     }
+
     const html = `
     <!DOCTYPE html>
     <html>
@@ -95,7 +96,27 @@ export default function ConferirIMA() {
           </tr>
           ${table}
         </table>
-        <img src={${imageArray[0]}} />
+        <table class="images"></table>
+        <script>
+
+        function generate (imageArray) {
+          const image = document.querySelector(".images");
+
+          let arrayContent = [];
+
+          for (let i = 0 ; i < imageArray.length ; i++ ){
+            const item = <img src={imageArray[i]} />
+            arrayContent.push(item);
+          }
+
+          for (let j = 0 ; j < arrayContent.length ; j++ ){
+            image.innerHTML += arrayContent[i];
+          }
+        }
+
+        generate();
+
+        </script>
       </body>
     </html> 
   `;

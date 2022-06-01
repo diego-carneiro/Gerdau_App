@@ -43,9 +43,8 @@ export default function NovoDesvio({ navigation }) {
       subCategorias: subCategoria,
     };
     setListaDeDesvios([...listaDeDesvios, novoDesvio]);
-    setImageArray([...imageArray, imageCode]);
   }
-console.log(imageArray);
+console.log(imageArray  );
   function triggerAlert() {
     Alert.alert("Novo Desvio", `Um desvio foi adicionado ao relatório.`);
   }
