@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 import * as Print from "expo-print";
 import { shareAsync } from "expo-sharing";
+import * as ImageManipulator from "expo-image-manipulator";
 import {
   StyleSheet,
   View,
@@ -12,32 +13,83 @@ import {
 } from "react-native";
 
 export default function ConferirIMA() {
+  let total = 0;
+
   const { groupName, data, listaDeDesvios, imageArray } =
     useContext(AuthContext);
 
   const printToFile = async () => {
     const { uri } = await Print.printToFileAsync({
-      html: createDynamicTable(),
-
+      html: await createDynamicTable(),
     });
-    console.log('File has been saved to:', uri);
-    await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
-  }
+    console.log("File has been saved to:", uri);
+    await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
+  };
 
-  const createDynamicTable = () => {
-    var table = "";
+  const totalReset = () => {
+    total = 0;
+  };
+
+  const createDynamicTable = async () => {
+    let localDesvio = "";
+    let pesoQuantidade = "";
+    let categoriasSub = "";
+    let QXP = 0;
+
     for (let i in listaDeDesvios) {
       const item = listaDeDesvios[i];
-      table = table + `
+
+      localDesvio =
+        localDesvio +
+        `
         <tr>
           <td>${item.local}</td>
           <td>${item.desvio}</td>
+        </tr>
+      `;
+
+      pesoQuantidade =
+        pesoQuantidade +
+        `
+        <tr>
           <td>${item.pesos}</td>
           <td>${item.quantidade}</td>
+        </tr>
+      `;
+
+      categoriasSub =
+        categoriasSub +
+        `
+        <tr>
           <td>${item.categorias}</td>
           <td>${item.subCategorias}</td>
         </tr>
-      `
+      `;
+      QXP = QXP + parseInt(item.quantidade) * parseInt(item.pesos);
+      console.log(QXP);
+    }
+
+    total = 100 - (50 * QXP) / 15;
+    console.log(total, "TOTAL");
+
+    let teste = ``;
+    for (let i = 0; i < imageArray.length; i++) {
+      const uriParts = imageArray[i].split(".");
+      const formatPart = uriParts[uriParts.length - 1];
+      let format;
+
+      if (formatPart.includes("png")) {
+        format = "png";
+      } else if (formatPart.includes("jpg") || formatPart.includes("jpeg")) {
+        format = "jpeg";
+      }
+
+      const manipResult = await ImageManipulator.manipulateAsync(
+        imageArray[i],
+        [],
+        { format: format || "png", base64: true }
+      );
+      teste += `<img key={i} src="data:image/${format};base64, ${manipResult.base64}" style="width:600px;" />`;
     }
 
     const html = `
@@ -67,15 +119,15 @@ export default function ConferirIMA() {
       <h1>Relatório<h1>
         <table>
           <tr>
-            <th>Nomes</th>
+            <th>Nomes:</th>
           </tr>
           <tr>
             <td>${groupName}</td>
           </tr>
-        <table>
+        </table>
         <table>
           <tr>
-            <th>Data</th>          
+            <th>Data:</th>          
           </tr>
           <tr>
             <td>${data}</td>                 
@@ -83,20 +135,42 @@ export default function ConferirIMA() {
         </table>
         <table>
           <tr>
-            <th>Local</th>
-            <th>Desvio</th>
-            <th>Pesos</th>
+            <th>Local:</th>        
+            <th>Desvio:</th>
           <tr>
+          <tr>
+            ${localDesvio}
+          </tr>
         </table>
         <table>
           <tr>
-            <th>Quantidade</th>
-            <th>Categorias</th>
-            <th>SubCategorias</th>
+            <th>Pesos:</th>        
+            <th>Quantidade:</th>
+          <tr>
+          <tr>
+            ${pesoQuantidade}
           </tr>
-          ${table}
         </table>
-        <table class="images"></table>
+        <table>
+          <tr>
+            <th>Categoria:</th>        
+            <th>SubCategoria:</th>
+          <tr>
+          <tr>
+            ${categoriasSub}
+          </tr>
+        </table> 
+        <table>
+          <tr>
+            <th>Total:</th>        
+          </tr>
+          <tr>
+            <td>${total}</td>
+          </tr>
+      </table> 
+        <table class="images">
+          ${teste}
+        </table>
         <script>
 
         function generate (imageArray) {
@@ -121,7 +195,7 @@ export default function ConferirIMA() {
     </html> 
   `;
     return html;
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -151,8 +225,12 @@ export default function ConferirIMA() {
         <Text style={styles.subTitle}>Imagens</Text>
         {imageArray.map((item, index) => (
           <Image
+            key={index}
             style={{
-              width: "80%", height: 320, marginLeft: 50, marginTop: 20,
+              width: "80%",
+              height: 320,
+              marginLeft: 50,
+              marginTop: 20,
               marginBottom: 20,
             }}
             source={{ uri: item }}
@@ -174,8 +252,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   mainTitle: {
-
-
     margin: 10,
     fontSize: 22,
     textAlign: "center",

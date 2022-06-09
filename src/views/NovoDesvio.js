@@ -23,15 +23,12 @@ export default function NovoDesvio({ navigation }) {
     subCategoria,
     listaDeDesvios,
     setListaDeDesvios,
-    imageCode,
     imageArray,
-    setImageArray
   } = useContext(AuthContext);
 
   function triggerModal() {
     modalizeRef.current?.open();
   }
-
 
   function criarDesvio() {
     const novoDesvio = {
@@ -44,7 +41,7 @@ export default function NovoDesvio({ navigation }) {
     };
     setListaDeDesvios([...listaDeDesvios, novoDesvio]);
   }
-console.log(imageArray  );
+  
   function triggerAlert() {
     Alert.alert("Novo Desvio", `Um desvio foi adicionado ao relatório.`);
   }
@@ -126,7 +123,7 @@ console.log(imageArray  );
       <Button
         navigation={navigation}
         buttonType={1}
-        buttonText={" TIRAR FOTOS"}
+        buttonText={"TIRAR FOTOS"}
         buttonNavigation={"Camera"}
       />
 

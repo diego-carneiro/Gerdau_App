@@ -13,14 +13,14 @@ import { AuthContext } from "../contexts/auth";
 
 export default function CameraScreen() {
   const [hasPermission, setHasPermission] = useState(null);
-  const { imageArray, imageCode, setImageCode, setImageArray } = useContext(AuthContext);
+  const { imageArray, imageCode, setImageCode, setImageArray } =
+    useContext(AuthContext);
   const camRef = useRef(null);
 
   function triggerAlert() {
-    Alert.alert(
-      "Captura de Imagem",
-      `Imagem de desvio salva.`
-    );
+    setTimeout(() => {
+      Alert.alert("Captura de Imagem", `Imagem de desvio salva.`);
+    }, 3000);
   }
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function CameraScreen() {
   }, []);
 
   useEffect(() => {
-    if(imageCode === null){
+    if (imageCode === null) {
       return;
     }
 
@@ -61,7 +61,12 @@ export default function CameraScreen() {
         type={Camera.Constants.Type.back}
         ref={camRef}
       />
-      <TouchableOpacity style={styles.button} onPress={() => { takePicture(), triggerAlert() }}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          takePicture(), triggerAlert();
+        }}
+      >
         <FontAwesome name="camera" size={22} color="#FFF" />
       </TouchableOpacity>
     </SafeAreaView>

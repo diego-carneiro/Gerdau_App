@@ -9,14 +9,12 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { AuthContext } from "../../contexts/auth";
 import Button from "../../components/Button";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function NovoIMA({ navigation }) {
   const { setGroupName, setData } = useContext(AuthContext);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-  const [text, setText] = useState(null);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -25,7 +23,7 @@ export default function NovoIMA({ navigation }) {
 
     let tempDate = new Date(currentDate);
     let fDate =
-      tempDate.getHours() +
+      tempDate.getDate() +
       "/" +
       (tempDate.getMonth() + 1) +
       "/" +
