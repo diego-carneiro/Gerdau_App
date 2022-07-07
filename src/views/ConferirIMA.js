@@ -42,34 +42,28 @@ export default function ConferirIMA() {
       localDesvio =
         localDesvio +
         `
-        <tr>
           <td>${item.local}</td>
           <td>${item.desvio}</td>
-        </tr>
       `;
 
       pesoQuantidade =
         pesoQuantidade +
         `
-        <tr>
           <td>${item.pesos}</td>
           <td>${item.quantidade}</td>
-        </tr>
       `;
 
       categoriasSub =
         categoriasSub +
         `
-        <tr>
           <td>${item.categorias}</td>
           <td>${item.subCategorias}</td>
-        </tr>
       `;
       QXP = QXP + parseInt(item.quantidade) * parseInt(item.pesos);
       console.log(QXP);
     }
 
-    total = 100 - (50 * QXP) / 15;
+    total = Math.ceil(100 - (50 * QXP) / 15);
     console.log(total, "TOTAL");
 
     let teste = ``;
@@ -117,6 +111,7 @@ export default function ConferirIMA() {
         </head>
       <body style="text-align: center;">
       <h1>Relatório<h1>
+      
         <table>
           <tr>
             <th>Nomes:</th>
@@ -125,49 +120,55 @@ export default function ConferirIMA() {
             <td>${groupName}</td>
           </tr>
         </table>
+
         <table>
           <tr>
             <th>Data:</th>          
           </tr>
           <tr>
-            <td>${data}</td>                 
+            <td>${data}</td>      
           </tr>
         </table>
+
         <table>
           <tr>
             <th>Local:</th>        
             <th>Desvio:</th>
-          <tr>
+          </tr>
           <tr>
             ${localDesvio}
           </tr>
         </table>
+
         <table>
           <tr>
             <th>Pesos:</th>        
             <th>Quantidade:</th>
-          <tr>
+          </tr>
           <tr>
             ${pesoQuantidade}
           </tr>
         </table>
+
         <table>
           <tr>
             <th>Categoria:</th>        
             <th>SubCategoria:</th>
-          <tr>
+          </tr>
           <tr>
             ${categoriasSub}
           </tr>
-        </table> 
+        </table>
+
         <table>
           <tr>
-            <th>Total:</th>        
+            <th>Total:</th>  
           </tr>
           <tr>
             <td>${total}</td>
           </tr>
-      </table> 
+        </table> 
+
         <table class="images">
           ${teste}
         </table>
@@ -193,7 +194,7 @@ export default function ConferirIMA() {
         </script>
       </body>
     </html> 
-  `;
+  `;''
     return html;
   };
 
@@ -211,7 +212,7 @@ export default function ConferirIMA() {
             <Text style={styles.topicTitle}>Local</Text>
             <Text style={styles.topicContent2}>{item.local}</Text>
             <Text style={styles.topicTitle}>Desvio</Text>
-            <Text style={styles.topicContent2}>{item.desvio}</Text>
+            <Text style={styles.topicContent2}>{item.desvio}</Text> 
             <Text style={styles.topicTitle}>Pesos</Text>
             <Text style={styles.topicContent2}>{item.pesos}</Text>
             <Text style={styles.topicTitle}>Quantidade</Text>
@@ -226,8 +227,8 @@ export default function ConferirIMA() {
         {imageArray.map((item, index) => (
           <Image
             key={index}
-            style={{
-              width: "80%",
+            style={{ 
+              width: "40%",
               height: 320,
               marginLeft: 50,
               marginTop: 20,
