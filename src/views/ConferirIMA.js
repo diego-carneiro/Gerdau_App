@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 import * as Print from "expo-print";
 import { shareAsync } from "expo-sharing";
@@ -83,7 +83,7 @@ export default function ConferirIMA() {
         [],
         { format: format || "png", base64: true }
       );
-      teste += `<img key={i} src="data:image/${format};base64, ${manipResult.base64}" style="width:600px;" />`;
+      teste += `<img key={i} src="data:image/${format};base64, ${manipResult.base64}" style="width:200px;" />`;
     }
 
     const html = `
@@ -94,17 +94,20 @@ export default function ConferirIMA() {
         <style>
         table {
           font-family: arial, sans-serif;
+          font-size: 12px;
           border-collapse: collapse;
           width: 100%;
         }
         
         td, th {
           border: 1px solid #dddddd;
+          font-size: 12px;
           text-align: left;
           padding: 8px;
         }
         
         tr:nth-child(even) {
+          font-size: 12px;
           background-color: #dddddd;
         }
         </style>

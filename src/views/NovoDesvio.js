@@ -1,6 +1,13 @@
 import React, { useState, useRef, useContext } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
-import { Modalize } from "react-native-modalize";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  Modal,
+} from "react-native";
+import "react-native-gesture-handler";
 import { AuthContext } from "../contexts/auth";
 import Button from "../components/Button";
 
@@ -12,7 +19,6 @@ import Categorias from "./Modal/Categorias";
 import SubCategoria from "./Modal/SubCategoria";
 
 export default function NovoDesvio({ navigation }) {
-  const modalizeRef = useRef(null);
   const [modalContent, setModalContent] = useState(0);
   const {
     local,
@@ -23,12 +29,8 @@ export default function NovoDesvio({ navigation }) {
     subCategoria,
     listaDeDesvios,
     setListaDeDesvios,
-    imageArray,
   } = useContext(AuthContext);
-
-  function triggerModal() {
-    modalizeRef.current?.open();
-  }
+  const [modalTrigger, setModalTrigger] = useState(false);
 
   function criarDesvio() {
     const novoDesvio = {
@@ -41,7 +43,7 @@ export default function NovoDesvio({ navigation }) {
     };
     setListaDeDesvios([...listaDeDesvios, novoDesvio]);
   }
-  
+
   function triggerAlert() {
     Alert.alert("Novo Desvio", `Um desvio foi adicionado ao relatório.`);
   }
@@ -51,7 +53,7 @@ export default function NovoDesvio({ navigation }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          triggerModal();
+          setModalTrigger(true);
           setModalContent(1);
         }}
       >
@@ -63,7 +65,7 @@ export default function NovoDesvio({ navigation }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          triggerModal();
+          setModalTrigger(true);
           setModalContent(2);
         }}
       >
@@ -75,7 +77,7 @@ export default function NovoDesvio({ navigation }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          triggerModal();
+          setModalTrigger(true);
           setModalContent(3);
         }}
       >
@@ -87,7 +89,7 @@ export default function NovoDesvio({ navigation }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          triggerModal();
+          setModalTrigger(true);
           setModalContent(4);
         }}
       >
@@ -99,7 +101,7 @@ export default function NovoDesvio({ navigation }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          triggerModal();
+          setModalTrigger(true);
           setModalContent(5);
         }}
       >
@@ -111,7 +113,7 @@ export default function NovoDesvio({ navigation }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          triggerModal();
+          setModalTrigger(true);
           setModalContent(6);
         }}
       >
@@ -138,14 +140,19 @@ export default function NovoDesvio({ navigation }) {
         </Text>
       </TouchableOpacity>
 
-      <Modalize ref={modalizeRef} snapPoint={600}>
-        {modalContent === 1 && <Local />}
-        {modalContent === 2 && <Desvio />}
-        {modalContent === 3 && <Peso />}
-        {modalContent === 4 && <Quantitidade />}
-        {modalContent === 5 && <Categorias />}
-        {modalContent === 6 && <SubCategoria />}
-      </Modalize>
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={modalTrigger}
+        onRequestClose={() => setModalTrigger(false)}
+      >
+        {modalContent === 1 && <Local setModalTrigger={setModalTrigger} />}
+        {modalContent === 2 && <Desvio setModalTrigger={setModalTrigger} />}
+        {modalContent === 3 && <Peso setModalTrigger={setModalTrigger} />}
+        {modalContent === 4 && <Quantitidade setModalTrigger={setModalTrigger} />}
+        {modalContent === 5 && <Categorias setModalTrigger={setModalTrigger} />}
+        {modalContent === 6 && <SubCategoria setModalTrigger={setModalTrigger} />}
+      </Modal>
     </View>
   );
 }

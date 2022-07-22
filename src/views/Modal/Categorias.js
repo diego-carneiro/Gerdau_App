@@ -3,12 +3,12 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 
 import { AuthContext } from "../../contexts/auth";
 
-export default function Categorias() {
+export default function Categorias({ setModalTrigger }) {
   const { setCategoria, setSubCatSelector } = useContext(AuthContext);
 
-  function triggerAlert() {
+  const triggerAlert = () => {
     Alert.alert("Definição de categorias", `Categoria definida.`);
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -18,6 +18,7 @@ export default function Categorias() {
         onPress={() => {
           setSubCatSelector("A"),
             triggerAlert(),
+            setModalTrigger(false),
             setCategoria("Resíduos Sólidos");
         }}
       >
@@ -30,6 +31,7 @@ export default function Categorias() {
         onPress={() => {
           setSubCatSelector("B"),
             triggerAlert(),
+            setModalTrigger(false),
             setCategoria("Emissões Atmosféricas");
         }}
       >
@@ -42,6 +44,7 @@ export default function Categorias() {
         onPress={() => {
           setSubCatSelector("C"),
             triggerAlert(),
+            setModalTrigger(false),
             setCategoria("Efluentes a Água");
         }}
       >
@@ -54,6 +57,7 @@ export default function Categorias() {
         onPress={() => {
           setSubCatSelector("D"),
             triggerAlert(),
+            setModalTrigger(false),
             setCategoria("Produtos Químicos");
         }}
       >
@@ -64,7 +68,10 @@ export default function Categorias() {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setSubCatSelector("E"), triggerAlert(), setCategoria("Gases");
+          setSubCatSelector("E"),
+            setModalTrigger(false),
+            triggerAlert(),
+            setCategoria("Gases");
         }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
@@ -76,6 +83,7 @@ export default function Categorias() {
         onPress={() => {
           setSubCatSelector("F"),
             triggerAlert(),
+            setModalTrigger(false),
             setCategoria("Recursos de Emergência");
         }}
       >
@@ -88,6 +96,7 @@ export default function Categorias() {
         onPress={() => {
           setSubCatSelector("G"),
             triggerAlert(),
+            setModalTrigger(false),
             setCategoria("Documentos e comunicação");
         }}
       >
@@ -101,7 +110,7 @@ export default function Categorias() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
   },
@@ -128,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalTitle: {
-    marginTop: 20,
+    margin: 40,
     fontSize: 20,
     textAlign: "center",
   },

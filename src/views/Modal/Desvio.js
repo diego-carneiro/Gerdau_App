@@ -11,13 +11,10 @@ import { AuthContext } from "../../contexts/auth";
 
 export default function Desvio() {
   const { setDesvio } = useContext(AuthContext);
-    
-  function triggerAlert() {
-    Alert.alert(
-      "Definição de desvio",
-      `Um desvio foi adicionado.`
-    );
-  }
+
+  const triggerAlert = () => {
+    Alert.alert("Definição de desvio", `Um desvio foi adicionado.`);
+  };
 
   return (
     <View style={styles.container}>
@@ -27,7 +24,12 @@ export default function Desvio() {
         placeholder="Descrição do desvio"
         onChangeText={(value) => setDesvio(value)}
       />
-      <TouchableOpacity style={styles.button} onPress={triggerAlert}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          triggerAlert(), setModalTrigger(false);
+        }}
+      >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           SALVAR
         </Text>
@@ -38,7 +40,7 @@ export default function Desvio() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
   },
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalTitle: {
-    margin: 20,
+    margin: 40,
     fontSize: 20,
   },
 });

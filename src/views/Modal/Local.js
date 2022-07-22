@@ -9,15 +9,12 @@ import {
 } from "react-native";
 import { AuthContext } from "../../contexts/auth";
 
-export default function Local() {
+export default function Local({ setModalTrigger }) {
   const { setLocal } = useContext(AuthContext);
-  
-  function triggerAlert() {
-    Alert.alert(
-      "Definição de local",
-      `Um local foi adicionado.`
-    );
-  }
+
+  const triggerAlert = () => {
+    Alert.alert("Definição de local", `Um local foi adicionado.`);
+  };
 
   return (
     <View style={styles.container}>
@@ -27,7 +24,12 @@ export default function Local() {
         placeholder="Descrição do local"
         onChangeText={(value) => setLocal(value)}
       />
-      <TouchableOpacity style={styles.button} onPress={triggerAlert}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          triggerAlert(), setModalTrigger(false);
+        }}
+      >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
           SALVAR
         </Text>
@@ -38,6 +40,7 @@ export default function Local() {
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
   },
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalTitle: {
-    margin: 20,
+    margin: 40,
     fontSize: 20,
   },
 });

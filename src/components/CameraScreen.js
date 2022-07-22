@@ -30,14 +30,7 @@ export default function CameraScreen() {
     })();
   }, []);
 
-  useEffect(() => {
-    if (imageCode === null) {
-      return;
-    }
-
-    setImageArray([...imageArray, imageCode]);
-  }, [imageCode]);
-
+  console.log(imageCode, "AQUI MESMO");
   if (hasPermission === null) {
     return <View />;
   }
@@ -49,9 +42,11 @@ export default function CameraScreen() {
   async function takePicture() {
     if (camRef) {
       const data = await camRef.current.takePictureAsync();
-      console.log(data, "DATA");
       setImageCode(data.uri);
     }
+
+    console.log("PASSOU AQUI");
+    setImageArray([...imageArray, imageCode]);
   }
 
   return (

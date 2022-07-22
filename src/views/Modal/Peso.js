@@ -1,29 +1,20 @@
 import React, { useState, useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import { AuthContext } from "../../contexts/auth";
 
-export default function Peso() {
+export default function Peso({ setModalTrigger }) {
   const { setPeso } = useContext(AuthContext);
 
-  function triggerAlert() {
-    Alert.alert(
-      "Definição de pesos",
-      `O valor de peso foi definido.`
-    );
-  }
+  const triggerAlert = () => {
+    Alert.alert("Definição de pesos", `O valor de peso foi definido.`);
+  };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setPeso("1"), triggerAlert();
+          setPeso("1"), setModalTrigger(false), triggerAlert();
         }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
@@ -33,7 +24,7 @@ export default function Peso() {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setPeso("2"), triggerAlert();
+          setPeso("2"), setModalTrigger(false), triggerAlert();
         }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
@@ -43,7 +34,7 @@ export default function Peso() {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setPeso("3"), triggerAlert();
+          setPeso("3"), setModalTrigger(false), triggerAlert();
         }}
       >
         <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
@@ -56,7 +47,9 @@ export default function Peso() {
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
     backgroundColor: "#fff",
+    justifyContent: "center",
     alignItems: "center",
   },
   button: {
@@ -82,7 +75,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalTitle: {
-    margin: 20,
+    margin: 40,
     fontSize: 20,
   },
 });

@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 
 import { AuthContext } from "../../contexts/auth";
 
-export default function SubCategoria() {
+export default function SubCategoria({ setModalTrigger }) {
   const { setSubCategoria, subCatSelector } = useContext(AuthContext);
 
   function triggerAlert() {
@@ -19,6 +19,7 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
+                setModalTrigger(false),
                 setSubCategoria("Armazenamento/Acionamento Incorreto");
             }}
           >
@@ -29,7 +30,9 @@ export default function SubCategoria() {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              triggerAlert(), setSubCategoria("Falha na identificação");
+              triggerAlert(),
+                setModalTrigger(false),
+                setSubCategoria("Falha na identificação");
             }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
@@ -39,7 +42,9 @@ export default function SubCategoria() {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              triggerAlert(), setSubCategoria("Mistura de Resíduos");
+              triggerAlert(),
+                setModalTrigger(false),
+                setSubCategoria("Mistura de Resíduos");
             }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
@@ -50,7 +55,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Derrame/Vazamento de resíduos")}}
+                setModalTrigger(false),
+                setSubCategoria("Derrame/Vazamento de resíduos");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               A.4 Derrame/Vazamento de resíduos
@@ -64,7 +71,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Fontes Fixas")}}
+                setModalTrigger(false),
+                setSubCategoria("Fontes Fixas");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               B.1 Fontes Fixas
@@ -74,7 +83,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Fontes Móveis")}}
+                setModalTrigger(false),
+                setSubCategoria("Fontes Móveis");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               B.2 Fontes Móveis
@@ -84,7 +95,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Falha no Controle Ambiental")}}
+                setModalTrigger(false),
+                setSubCategoria("Falha no Controle Ambiental");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               B.3 Falha no Controle Ambiental
@@ -98,7 +111,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Vazamento de água")}}
+                setModalTrigger(false),
+                setSubCategoria("Vazamento de água");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               C.1 Vazamento de água
@@ -108,7 +123,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Vazamento de Efluentes")}}
+                setModalTrigger(false),
+                setSubCategoria("Vazamento de Efluentes");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               C.2 Vazamento de Efluentes
@@ -118,7 +135,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Aporte no canal")}}
+                setModalTrigger(false),
+                setSubCategoria("Aporte no canal");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               C.3 Aporte no canal
@@ -128,7 +147,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Sem identificação")}}
+                setModalTrigger(false),
+                setSubCategoria("Sem identificação");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               C.4 Sem identificação
@@ -142,7 +163,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Armazenamento Incorreto")}}
+                setModalTrigger(false),
+                setSubCategoria("Armazenamento Incorreto");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               D.1 Armazenamento Incorreto
@@ -152,7 +175,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Falha na identificação")}}
+                setModalTrigger(false),
+                setSubCategoria("Falha na identificação");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               D.2 Falha na identificação
@@ -162,7 +187,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Derrane ou vazamentos")}}
+                setModalTrigger(false),
+                setSubCategoria("Derrane ou vazamentos");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               D.3 Derrane ou vazamentos
@@ -172,7 +199,9 @@ export default function SubCategoria() {
             style={styles.button}
             onPress={() => {
               triggerAlert(),
-              setSubCategoria("Falha/Inexistência da FE")}}
+                setModalTrigger(false),
+                setSubCategoria("Falha/Inexistência da FE");
+            }}
           >
             <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
               D.4 Falha/Inexistência da FE
@@ -185,7 +214,9 @@ export default function SubCategoria() {
           style={styles.button}
           onPress={() => {
             triggerAlert(),
-            setSubCategoria("Vazamento")}}
+              setModalTrigger(false),
+              setSubCategoria("Vazamento");
+          }}
         >
           <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
             E.1 Vazamento
@@ -197,7 +228,9 @@ export default function SubCategoria() {
           style={styles.button}
           onPress={() => {
             triggerAlert(),
-            setSubCategoria("Falha de Kit Emergência Ambiental")}}
+              setModalTrigger(false),
+              setSubCategoria("Falha de Kit Emergência Ambiental");
+          }}
         >
           <Text style={{ color: "#FFF", fontSize: 20, textAlign: "center" }}>
             F.1 Falha de Kit Emergência Ambiental
@@ -210,7 +243,7 @@ export default function SubCategoria() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
   },
@@ -237,7 +270,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalTitle: {
-    margin: 20,
+    margin: 40,
     fontSize: 20,
   },
 });
