@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { AuthContext } from "../../contexts/auth";
 
-export default function Desvio() {
+export default function Desvio({ setModalTrigger }) {
   const { setDesvio } = useContext(AuthContext);
 
   const triggerAlert = () => {

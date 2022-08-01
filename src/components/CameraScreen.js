@@ -6,6 +6,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Alert,
+
+  
 } from "react-native";
 import { Camera } from "expo-camera";
 import { FontAwesome } from "@expo/vector-icons";
